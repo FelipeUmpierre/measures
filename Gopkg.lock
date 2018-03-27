@@ -2,12 +2,6 @@
 
 
 [[projects]]
-  name = "github.com/Masterminds/squirrel"
-  packages = ["."]
-  revision = "a6b93000bd219143c56c16e6cb1c4b91da3f224b"
-  version = "v1.0"
-
-[[projects]]
   name = "github.com/go-chi/chi"
   packages = ["."]
   revision = "e83ac2304db3c50cf03d96a2fcd39009d458bc35"
@@ -21,18 +15,6 @@
     "reflectx"
   ]
   revision = "cf35089a197953c69420c8d0cecda90809764b1d"
-
-[[projects]]
-  branch = "master"
-  name = "github.com/lann/builder"
-  packages = ["."]
-  revision = "1b87b36280d04fe7882d1512bf038ea2967ad534"
-
-[[projects]]
-  branch = "master"
-  name = "github.com/lann/ps"
-  packages = ["."]
-  revision = "62de8c46ede02a7675c4c79c84883eb164cb71e3"
 
 [[projects]]
   branch = "master"
@@ -88,6 +70,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "5faf994594ebbce79f3cab836c76be2c8d9a3085c1e88eb5441d2f3d524174cb"
+  inputs-digest = "d258460e03077879b9cc08c3fad182efa5f0a2e8e84f4c9af8af92acc38e52f6"
   solver-name = "gps-cdcl"
   solver-version = 1

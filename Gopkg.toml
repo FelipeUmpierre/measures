@@ -46,9 +46,5 @@
   version = "1.0.5"
 
 [[constraint]]
-  name = "github.com/Masterminds/squirrel"
-  version = "1.0.0"
-
-[[constraint]]
   branch = "master"
   name = "github.com/ulule/loukoum"
