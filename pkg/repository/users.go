@@ -25,14 +25,13 @@ func NewUsersRepository(db *sqlx.DB) *UserRepo {
 
 // Save saves the domain
 func (u *UserRepo) Save(user *domain.User) (*domain.User, error) {
-	builder := lk.Insert(`users`).Set(
+	query, args := lk.Insert(`users`).Set(
 		lk.Pair(`id`, user.ID),
 		lk.Pair(`name`, user.Name),
 	).OnConflict(`id`, lk.DoUpdate(
 		lk.Pair(`name`, user.Name),
-	)).Returning(`id`, `name`)
-
-	query, args := builder.Prepare()
+	)).Returning(`id`, `name`).
+		Prepare()
 
 	stmt, err := u.db.PrepareNamed(query)
 	if err != nil {
@@ -62,7 +61,10 @@ func (u *UserRepo) FindAll() (*[]domain.User, error) {
 
 // FindByID return the result for specific row
 func (u *UserRepo) FindByID(ID string) (*domain.User, error) {
-	query, args := lk.Select(`id`, `name`).From(`users`).Where(lk.Condition(`id`).Equal(ID)).Prepare()
+	query, args := lk.Select(`id`, `name`).
+		From(`users`).
+		Where(lk.Condition(`id`).Equal(ID)).
+		Prepare()
 
 	stmt, err := u.db.PrepareNamed(query)
 	if err != nil {
