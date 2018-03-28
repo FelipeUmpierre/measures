@@ -19,7 +19,7 @@ func main() {
 	usersRepo := repository.NewUsersRepository(db)
 
 	r := chi.NewRouter()
-	r.Route(`/user`, func(r *chi.Router) {
+	r.Route(`/user`, func(r chi.Router) {
 		r.Get(`/all`, handler.AllUsers(usersRepo))
 		r.Get(`/{id}`, handler.GetUser(usersRepo))
 	})
