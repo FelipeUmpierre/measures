@@ -1,0 +1,22 @@
+
+builds:
+  - main: ./cmd/command/main.go
+    binary: command
+    goos:
+      - linux
+    goarch:
+      - amd64
+
+    env:
+      - CGO_ENABLED=0
+
+    ldflags: -s -w
+
+archive:
+  format: tar.gz
+  replacements:
+    linux: linux
+  name_template: '{{ .ProjectName }}_{{ .Os }}_{{ .Arch }}'
+  
+checksum:
+  name_template: '{{ .ProjectName }}_checksum.txt'
