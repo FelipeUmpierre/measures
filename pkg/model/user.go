@@ -1,4 +1,4 @@
-package domain
+package model
 
 import uuid "github.com/satori/go.uuid"
 

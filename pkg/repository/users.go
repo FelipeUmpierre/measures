@@ -1,7 +1,7 @@
 package repository
 
 import (
-	"github.com/FelipeUmpierre/measures/pkg/domain"
+	"github.com/FelipeUmpierre/measures/pkg/model"
 	"github.com/jmoiron/sqlx"
 	lk "github.com/ulule/loukoum"
 )
@@ -24,7 +24,7 @@ func NewUsersRepository(db *sqlx.DB) *UserRepo {
 }
 
 // Save saves the domain
-func (u *UserRepo) Save(user *domain.User) (*domain.User, error) {
+func (u *UserRepo) Save(user *model.User) (*model.User, error) {
 	query, args := lk.Insert(`users`).Set(
 		lk.Pair(`id`, user.ID),
 		lk.Pair(`name`, user.Name),
@@ -44,7 +44,7 @@ func (u *UserRepo) Save(user *domain.User) (*domain.User, error) {
 }
 
 // FindAll returns the result for all rows
-func (u *UserRepo) FindAll() (*[]domain.User, error) {
+func (u *UserRepo) FindAll() (*[]model.User, error) {
 	query, args := lk.Select(`id`, `name`).From(`users`).Prepare()
 
 	stmt, err := u.db.PrepareNamed(query)
@@ -53,14 +53,14 @@ func (u *UserRepo) FindAll() (*[]domain.User, error) {
 	}
 	defer stmt.Close()
 
-	users := new([]domain.User)
+	users := new([]model.User)
 	err = stmt.Select(users, args)
 
 	return users, err
 }
 
 // FindByID return the result for specific row
-func (u *UserRepo) FindByID(ID string) (*domain.User, error) {
+func (u *UserRepo) FindByID(ID string) (*model.User, error) {
 	query, args := lk.Select(`id`, `name`).
 		From(`users`).
 		Where(lk.Condition(`id`).Equal(ID)).
@@ -72,7 +72,7 @@ func (u *UserRepo) FindByID(ID string) (*domain.User, error) {
 	}
 	defer stmt.Close()
 
-	user := new(domain.User)
+	user := new(model.User)
 	if err = stmt.Get(user, args); err != nil {
 		return nil, err
 	}

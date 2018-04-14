@@ -3,19 +3,18 @@ package handler
 import (
 	"net/http"
 
+	"github.com/FelipeUmpierre/measures/pkg/model"
 	"github.com/go-chi/chi"
-
-	"github.com/FelipeUmpierre/measures/pkg/domain"
 	"github.com/go-chi/render"
 )
 
 type (
 	findAllUserRepository interface {
-		FindAll() (*[]domain.User, error)
+		FindAll() (*[]model.User, error)
 	}
 
 	getUserRepository interface {
-		FindByID(ID string) (*domain.User, error)
+		FindByID(ID string) (*model.User, error)
 	}
 )
 
@@ -26,10 +25,8 @@ func AllUsers(repo findAllUserRepository) func(w http.ResponseWriter, r *http.Re
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
 			render.JSON(w, r, struct {
-				Error string `json:"error"`
-			}{
-				err.Error(),
-			})
+				Error error `json:"error"`
+			}{err})
 
 			return
 		}
@@ -47,10 +44,8 @@ func GetUser(repo getUserRepository) func(w http.ResponseWriter, r *http.Request
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
 			render.JSON(w, r, struct {
-				Error string `json:"error"`
-			}{
-				err.Error(),
-			})
+				Error error `json:"error"`
+			}{err})
 
 			return
 		}
