@@ -1,60 +1,59 @@
 package handler
 
-import (
-	"net/http"
+// import (
+// 	"net/http"
 
-	"github.com/go-chi/chi"
+// 	"github.com/FelipeUmpierre/measures/pkg/domain"
+// 	"github.com/go-chi/chi"
+// 	"github.com/go-chi/render"
+// )
 
-	"github.com/FelipeUmpierre/measures/pkg/domain"
-	"github.com/go-chi/render"
-)
+// type (
+// 	findAllUserRepository interface {
+// 		FindAll() (*[]domain.User, error)
+// 	}
 
-type (
-	findAllUserRepository interface {
-		FindAll() (*[]domain.User, error)
-	}
+// 	getUserRepository interface {
+// 		FindByID(ID string) (*domain.User, error)
+// 	}
+// )
 
-	getUserRepository interface {
-		FindByID(ID string) (*domain.User, error)
-	}
-)
+// // AllUsers return the users saved
+// func AllUsers(repo findAllUserRepository) func(w http.ResponseWriter, r *http.Request) {
+// 	return func(w http.ResponseWriter, r *http.Request) {
+// 		users, err := repo.FindAll()
+// 		if err != nil {
+// 			w.WriteHeader(http.StatusInternalServerError)
+// 			render.JSON(w, r, struct {
+// 				Error string `json:"error"`
+// 			}{
+// 				err.Error(),
+// 			})
 
-// AllUsers return the users saved
-func AllUsers(repo findAllUserRepository) func(w http.ResponseWriter, r *http.Request) {
-	return func(w http.ResponseWriter, r *http.Request) {
-		users, err := repo.FindAll()
-		if err != nil {
-			w.WriteHeader(http.StatusInternalServerError)
-			render.JSON(w, r, struct {
-				Error string `json:"error"`
-			}{
-				err.Error(),
-			})
+// 			return
+// 		}
 
-			return
-		}
+// 		render.JSON(w, r, users)
+// 	}
+// }
 
-		render.JSON(w, r, users)
-	}
-}
+// // GetUser return the users saved
+// func GetUser(repo getUserRepository) func(w http.ResponseWriter, r *http.Request) {
+// 	return func(w http.ResponseWriter, r *http.Request) {
+// 		id := chi.URLParam(r, `id`)
 
-// GetUser return the users saved
-func GetUser(repo getUserRepository) func(w http.ResponseWriter, r *http.Request) {
-	return func(w http.ResponseWriter, r *http.Request) {
-		id := chi.URLParam(r, `id`)
+// 		user, err := repo.FindByID(id)
+// 		if err != nil {
+// 			w.WriteHeader(http.StatusInternalServerError)
+// 			render.JSON(w, r, struct {
+// 				Error string `json:"error"`
+// 			}{
+// 				err.Error(),
+// 			})
 
-		user, err := repo.FindByID(id)
-		if err != nil {
-			w.WriteHeader(http.StatusInternalServerError)
-			render.JSON(w, r, struct {
-				Error string `json:"error"`
-			}{
-				err.Error(),
-			})
+// 			return
+// 		}
 
-			return
-		}
-
-		render.JSON(w, r, user)
-	}
-}
+// 		render.JSON(w, r, user)
+// 	}
+// }
